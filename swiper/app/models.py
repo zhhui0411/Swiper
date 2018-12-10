@@ -25,7 +25,8 @@ class User(models.Model):
     def age(self):
         '''用户年龄'''
         today = datetime.date.today()
-        birth = datetime.date(self.birth_day)
+        birth = datetime.date(self.birth_day, self.birth_month, self.birth_day)
+        return (today - birth).days // 365
 
     def to_dict(self):
         return {
@@ -36,6 +37,7 @@ class User(models.Model):
             'avatar': self.avatar,
             'location': self.location,
         }
+
 
 class Profile(models.Model):
     SEX = (
